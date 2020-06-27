@@ -1,0 +1,146 @@
+#
+# bir ilk ve son sayı giriyorsunuz. Girdiğiniz aralıktaki mükemmel sayıları buluyor
+#
+def mukemmel(x):
+    i = 1
+    toplam = 0
+    while (i < x):
+        if (x % i == 0):
+            toplam += i
+        i += 1
+    if (toplam == x):
+        return 1
+    else:
+        return 2
+def auto_muk(first,last):
+    muks = [ x for x in range(first,last)]
+
+    for x in muks:
+        if mukemmel(x)==1:
+            print(f"{x} bir mükemmel sayıdır.")
+first= int(input("ilk sayıyı giriniz: ))
+last = int(input("son sayıyı giriniz: ))
+auto_muk(first, last)
+
+
+#
+#bir ilk ve son sayı giriyorsunuz. Girdiğiniz aralıktaki armstrong sayıları buluyor
+#
+def arms(x):
+    arNum= x
+    if len(str(arNum)) > 0:
+        armsNumsList=[]
+        armsTop=0
+        for i in range(len(str(arNum))):
+            armsNumsList.append(int(str(arNum)[i])**len(str(arNum)))
+            armsTop+=int(str(arNum)[i])**len(str(arNum))
+        if armsTop == arNum:
+            return 1
+        else:
+            return 2
+        
+def show_arms(first, last):
+    while True:
+        armstrong = [ f"{x} bir armstrong sayıdır." for x in range(first,last) if arms(x)==1]
+        print(armstrong)
+        devam = input("çıkmak için 'q' devam için herhangi bir tuşa basın.")
+        if devam == 'q':
+            quit()
+        else:
+            greetings(1)
+
+def greetings(a = 1):
+    if a == 1:
+        print("Merhaba. Gireceğiniz iki sayı arasındaki bütün armstrong sayıları döndürecek programa hoşgeldiniz.")
+        first= int(input("ilk sayıyı giriniz: "))
+        last = int(input("son sayıyı giriniz: "))
+        the_app(first,last,a)
+    else:
+        print("Tekrar merhaba.")
+        first= int(input("ilk sayıyı giriniz: "))
+        last = int(input("son sayıyı giriniz: "))
+        the_app(first,last,a)
+
+def the_app(first,last,a):
+    if first < last:
+        show_arms(first,last)
+    else:
+        if first == last:
+            print("Girdiğiniz iki sayı birbirine eşit. Girdiğiniz iki sayı bir aralık oluşturmalı.")
+            a+=1
+            greetings(a)
+        else:
+            first,last=last,first
+            show_arms(first,last)
+
+greetings(1)
+----------------------------------------------------------------------------------
+#
+#Verdiğiniz aralıktaki asal sayıları döndürür.
+#
+
+def asal(x):
+    a=0
+    for i in range(x+1):
+        if i > 1:
+            if x%i==0:           
+                a+=1               
+    if a == 1:
+        return 1
+
+def kul_asal():
+    bas = int(input("başlangıç sayısı: "))
+    bitis = int(input("bitiş sayısı: "))
+    asalsay = [x for x in range(bas+1,bitis) if asal(x)==1]
+    
+    print(f" toplam {len(asalsay)} tane asal sayı vardır {bas} ile {bitis} arasında.")
+    ans = input("yeni aralık vermek için 'y', çıkmak için 'n', aralıktaki asalları görmek için 's' yi seçiniz. ")
+    if ans == "y":
+        kul_asal()
+    elif ans == "n":
+        quit()
+    elif ans == "s":
+        print(asalsay)
+        ans = input("yeni aralık vermek için 'y', çıkmak için 'n' ")
+        if ans == "y":
+            kul_asal()
+        elif ans == "n":
+            quit()
+        else:
+            print("geçerli bir değer vermediniz. Çıkılıyor...")
+
+kul_asal()
+
+#
+#vereceğiniz aralıktaki tek sayılar
+#
+
+print("Bir başlangıç ve bitiş değeri giriniz: ")
+bas = int(input("Başlangıç değeri: "))
+son = int(input("Bitiş değeri: "))
+if son > bas:
+    print("verdiğiniz aralıktaki tek sayılar: ")
+    while son >= bas:
+        if bas%2==1:
+            if bas <= son:
+                print(bas)
+            bas+=2
+        else:
+            print(bas+1)
+            if bas <= son:
+                print(bas)
+            bas+=2        
+
+elif son == bas:
+    print(f"verdiğiniz iki değer bir birine eş {bas}")
+    print("Bir başlangıç ve bitiş değeri giriniz: ")
+    bas = int(input("Başlangıç değeri: "))
+    son = int(input("Bitiş değeri: "))
+
+else:
+    print(f"verdiğiniz bitiş değeri başlangıç değerinden daha büyük")
+    print("Bir başlangıç ve bitiş değeri giriniz: ")
+    bas = int(input("Başlangıç değeri: "))
+    son = int(input("Bitiş değeri: "))
+
+
